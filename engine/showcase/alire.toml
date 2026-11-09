@@ -14,7 +14,11 @@ yarlib_engine = "*"
 
 [[pins]]
 yarlib_engine = { path = ".." }
+bedrock = { path = "../../vendor/bedrock" }
 
 [gpr-set-externals]
 YARLIB_PLATFORM = "sdl3"
 YARLIB_RENDERER = "opengl"
+
+[[depends-on]]
+gnatprove = "^16.1.0"

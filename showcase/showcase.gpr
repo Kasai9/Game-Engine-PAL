@@ -10,6 +10,18 @@ project Showcase is
       for Default_Switches ("Ada") use
         ("-gnat2022", "-gnata", "-gnatwa", "-gnatwe", "-gnatVa", "-gnatyg", "-gnatyM100", "-g", "-O2");
    end Compiler;
+   --  Windows: Alire's MSYS2 keeps SDL3 outside the toolchain's search path.
+   --  scripts/arena.ps1 sets YARLIB_MSYS_LIB to the ucrt64 or mingw64 lib folder
+   --  it found. A plain alr build falls back to the mingw64 folder
+   --  (pacman -S mingw-w64-x86_64-sdl3). Other systems add no search path.
+   Msys_Lib := external ("YARLIB_MSYS_LIB",
+                         external ("LOCALAPPDATA", "") & "/alire/cache/msys64/mingw64/lib");
+   package Linker is
+      case Yarlib.Host_OS is
+         when "windows" => for Default_Switches ("Ada") use ("-L" & Msys_Lib);
+         when others    => null;
+      end case;
+   end Linker;
    package Binder is
       for Switches ("Ada") use ("-Es");
    end Binder;

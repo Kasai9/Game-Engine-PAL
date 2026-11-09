@@ -14,6 +14,7 @@ yarlib = "*"
 
 [[pins]]
 yarlib = { path = ".." }
+bedrock = { path = "../vendor/bedrock" }
 
 [gpr-set-externals]
 YARLIB_PLATFORM = "sdl3"

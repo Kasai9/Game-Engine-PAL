@@ -1,0 +1,11 @@
+name = "bedrock"
+description = "The GNAT Academic Program foundation types"
+version = "1.0.0"
+authors = ["Olivier Henley"]
+maintainers = ["Olivier Henley <henley@adacore.com>"]
+maintainers-logins = ["ohenley"]
+licenses = "Apache-2.0"
+website = "https://github.com/GNAT-Academic-Program/bedrock"
+tags = ["types", "geometry", "color", "input", "spark", "gap"]
+
+project-files = ["bedrock.gpr"]

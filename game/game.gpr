@@ -1,0 +1,6 @@
+
+project Game is
+   for Source_Dirs use ("src/player", "tests");
+   for Main use ("test_player_logic.adb", "ascii_demo.adb");
+end Game;
+

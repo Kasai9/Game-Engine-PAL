@@ -14,8 +14,9 @@ project-files = ["yarlib.gpr"]
 bedrock = "*"
 
 [[pins]]
-bedrock = { url = "https://github.com/GNAT-Academic-Program/bedrock.git" }
+bedrock = { path = "vendor/bedrock" }
 
 [gpr-externals]
 YARLIB_PLATFORM = ["null", "sdl3"]
 YARLIB_RENDERER = ["software", "opengl"]
+YARLIB_HOST_OS = ["windows", "macos", "linux"]

@@ -13,3 +13,20 @@ bad.scene
 empty.scene
 rt.scene
 two.scene
+
+# Local OS and Python/ZIP metadata
+.DS_Store
+__MACOSX/
+
+# Generated executables and libraries
+*.exe
+*.dll
+*.pyc
+__pycache__/
+.venv/
+
+# Generated Ada compiler and binder files
+b__*.adb
+b__*.ads
+.ada_*.json
+.link_*.json

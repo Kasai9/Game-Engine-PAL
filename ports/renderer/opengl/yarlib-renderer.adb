@@ -91,7 +91,10 @@ package body Yarlib.Renderer is
    procedure Draw (B : Batch.Batch) is
       Base : constant System.Address := B.Vertices (1)'Address;
       use type System.Address;
-      use type System.Storage_Elements.Storage_Offset;
+      function "+"
+        (Left  : System.Address;
+         Right : System.Storage_Elements.Storage_Offset)
+         return System.Address renames System.Storage_Elements."+";
    begin
       glVertexPointer (2, GL_FLOAT, Stride, Base);
       glTexCoordPointer (2, GL_FLOAT, Stride, Base + 8);

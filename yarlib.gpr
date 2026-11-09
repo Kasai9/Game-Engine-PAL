@@ -6,6 +6,18 @@ library project Yarlib is
    type Renderer_Kind is ("software", "opengl");
    Platform : Platform_Kind := external ("YARLIB_PLATFORM", "null");
    Renderer : Renderer_Kind := external ("YARLIB_RENDERER", "software");
+   type OS_Env_Kind is ("Windows_NT", "unix");
+   OS_Env : OS_Env_Kind := external ("OS", "unix");
+   type Host_OS_Kind is ("windows", "macos", "linux");
+   Default_Host_OS : Host_OS_Kind := "linux";
+   case OS_Env is
+      when "Windows_NT" => Default_Host_OS := "windows";
+      when others       => null;
+   end case;
+   --  Host_OS only selects the OpenGL link flag. Windows is detected from the
+   --  OS environment variable, so a plain alr build works there. macOS cannot be
+   --  detected this way, so scripts/arena-macos.sh sets YARLIB_HOST_OS=macos.
+   Host_OS : Host_OS_Kind := external ("YARLIB_HOST_OS", Default_Host_OS);
    --  null/software needs nothing and is what the tests use: no window,
    --  frames rendered into memory and readable back.
    --  sdl3/opengl is a game on screen: needs SDL3 and an OpenGL driver.
@@ -44,7 +56,12 @@ library project Yarlib is
       case Renderer is
          when "opengl" =>
             case Platform is
-               when "sdl3" => Libs := Libs & ("-lGL");
+               when "sdl3" =>
+                  case Host_OS is
+                     when "windows" => Libs := Libs & ("-lopengl32");
+                     when "macos"   => Libs := Libs & ("-framework", "OpenGL");
+                     when "linux"   => Libs := Libs & ("-lGL");
+                  end case;
                when others => null;
             end case;
          when others => null;

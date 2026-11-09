@@ -14,6 +14,7 @@ escape = "*"
 
 [[pins]]
 yarlib = { path = ".." }
+bedrock = { path = "../vendor/bedrock" }
 escape = { url = "https://github.com/GNAT-Academic-Program/escape.git" }
 #  escape is the ECS capstone's seed. Its pools are a placeholder until
 #  that team's milestone 1 (October); until then entities cannot hold
